@@ -20,6 +20,15 @@ def draw_line(surface, start_pos, end_pos, color, width=1):
         pygame.draw.circle(surface, color, (x, y), math.ceil(width / 2))
 
 
+def draw_lines(surface, lines, color, width=1):
+    for line in lines:
+        for j, point in enumerate(line):
+            if j < 1:
+                pygame.draw.circle(surface, color, point, math.ceil(width / 2))
+                continue
+            draw_line(surface, line[j - 1], point, color)
+
+
 def main():
     screen = pygame.display.set_mode(DEFAULT_SIZE)
     clock = pygame.time.Clock()
