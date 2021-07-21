@@ -45,7 +45,8 @@ def main():
     screen = pygame.display.set_mode(DEFAULT_SIZE)
     clock = pygame.time.Clock()
     while True:
-        clock.tick(FPS)
+        ms = clock.tick(FPS)
+        dt = get_delta_time(ms)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
