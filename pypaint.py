@@ -10,6 +10,14 @@ DEFAULT_SIZE = (DEFAULT_WIDTH, DEFAULT_HEIGHT)
 FPS = 60
 
 
+class Pen:
+    def __init__(self, color=(0, 0, 0), pos=(0, 0), width=1):
+        self.pos = pygame.Vector2(pos)
+        self.color = pygame.Color(color)
+        self.width = width
+        self.down = False
+
+
 def draw_line(surface, start_pos, end_pos, color, width=1):
     dx = end_pos[0] - start_pos[0]
     dy = end_pos[1] - start_pos[1]
