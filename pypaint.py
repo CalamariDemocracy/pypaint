@@ -37,6 +37,10 @@ def draw_lines(surface, lines, color, width=1):
             draw_line(surface, line[j - 1], point, color)
 
 
+def get_delta_time(ms_last_frame):
+    return round(ms_last_frame / 1000 * 60)
+
+
 def main():
     screen = pygame.display.set_mode(DEFAULT_SIZE)
     clock = pygame.time.Clock()
