@@ -1,7 +1,7 @@
 # pypaint
 
 # About
-A basic paint/draw program in Python, implemented using the pygame module.
+Basic paint program built in Python and pygame.
 
 # Installation
 1. Install Python 3.
