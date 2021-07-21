@@ -49,6 +49,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+        screen.fill('white')
+        pygame.display.update()
 
 
 if __name__ == '__main__':
