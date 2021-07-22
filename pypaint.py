@@ -11,6 +11,7 @@ FPS = 60
 
 
 class Pen:
+    """contains current drawing data"""
     def __init__(self, color=(0, 0, 0), pos=(0, 0), width=1):
         self.pos = pygame.Vector2(pos)
         self.color = pygame.Color(color)
@@ -19,6 +20,7 @@ class Pen:
 
 
 def draw_line(surface, start_pos, end_pos, color, width=1):
+    """draws circles pixel by pixel between two points to create a line"""
     dx = end_pos[0] - start_pos[0]
     dy = end_pos[1] - start_pos[1]
     distance = max(abs(dx), abs(dy))
@@ -29,6 +31,10 @@ def draw_line(surface, start_pos, end_pos, color, width=1):
 
 
 def draw_points(surface, points, color, width=1):
+    """draws lines between all given points
+    
+    Single point defaults to circle.
+    """
     for j, point in enumerate(points):
         if j < 1:
             pygame.draw.circle(surface, color, point, math.ceil(width / 2))
@@ -37,6 +43,7 @@ def draw_points(surface, points, color, width=1):
 
 
 def get_delta_time(ms_last_frame):
+    """calculate delta time based on milliseconds past"""
     return round(ms_last_frame / 1000 * 60)
 
 
