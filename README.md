@@ -10,6 +10,7 @@ Basic paint program built in Python and pygame.
 
 # Usage
 - Hold left click to draw
-- Scroll mouse wheel to change pen width
+- Hold right click to erase
+- Scroll mouse wheel to change pen/eraser width
 - Press backspace to erase last line
 - Press ctrl + backspace to erase all
