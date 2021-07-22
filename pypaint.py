@@ -41,6 +41,7 @@ def get_delta_time(ms_last_frame):
 
 
 def main():
+    """initializes display and other resources, then handles game loop"""
     screen = pygame.display.set_mode(DEFAULT_SIZE)
     clock = pygame.time.Clock()
     pen = Pen()
