@@ -33,7 +33,7 @@ def draw_points(surface, points, color, width=1):
         if j < 1:
             pygame.draw.circle(surface, color, point, math.ceil(width / 2))
             continue
-        draw_line(surface, points[j - 1], point, color)
+        draw_line(surface, points[j - 1], point, color, width)
 
 
 def get_delta_time(ms_last_frame):
@@ -44,6 +44,7 @@ def main():
     screen = pygame.display.set_mode(DEFAULT_SIZE)
     clock = pygame.time.Clock()
     pen = Pen()
+    range_width = (1, 25)
     lines = []
     lines_info = []
 
@@ -56,18 +57,24 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button != 2:
                     lines.append([])
-                    lines_info.append({'color': pen.color})
+                    lines_info.append({'color': pen.color, 'width': pen.width})
                     pen.down = True
             if event.type == pygame.MOUSEBUTTONUP:
                 if event.button != 2:
                     pen.down = False
+            if event.type == pygame.MOUSEWHEEL:
+                pen.width += -1 if event.y > 0 else 1
+                if pen.width > max(range_width):
+                    pen.width = max(range_width)
+                if pen.width < min(range_width):
+                    pen.width = min(range_width)
         if pen.down:
             point = pygame.mouse.get_pos()
             if point not in lines[-1]:
                 lines[-1].append(point)
         screen.fill('white')
         for i, line in enumerate(lines):
-            draw_points(screen, line, lines_info[i]['color'])
+            draw_points(screen, line, lines_info[i]['color'], lines_info[i]['width'])
         pygame.display.update()
 
 
