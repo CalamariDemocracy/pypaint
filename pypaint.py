@@ -53,6 +53,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    if pygame.key.get_mods() and pygame.KMOD_CTRL:
+                        lines.clear()
+                    elif lines:
+                        lines.pop()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button != 2:
                     lines.append({'color': pen.color, 'width': pen.width, 'points': []})
