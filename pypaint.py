@@ -46,7 +46,6 @@ def main():
     pen = Pen()
     range_width = (1, 25)
     lines = []
-    lines_info = []
 
     while True:
         ms = clock.tick(FPS)
@@ -56,8 +55,7 @@ def main():
                 return
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button != 2:
-                    lines.append([])
-                    lines_info.append({'color': pen.color, 'width': pen.width})
+                    lines.append({'color': pen.color, 'width': pen.width, 'points': []})
                     pen.down = True
             if event.type == pygame.MOUSEBUTTONUP:
                 if event.button != 2:
@@ -70,11 +68,11 @@ def main():
                     pen.width = min(range_width)
         if pen.down:
             point = pygame.mouse.get_pos()
-            if point not in lines[-1]:
-                lines[-1].append(point)
+            if point not in lines[-1]['points']:
+                lines[-1]['points'].append(point)
         screen.fill('white')
         for i, line in enumerate(lines):
-            draw_points(screen, line, lines_info[i]['color'], lines_info[i]['width'])
+            draw_points(screen, line['points'], line['color'], line['width'])
         pygame.display.update()
 
 
