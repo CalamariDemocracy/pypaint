@@ -9,4 +9,7 @@ Basic paint program built in Python and pygame.
 3. Run paint.py in your favorite text editor/IDE.
 
 # Usage
-(To be added!)
+- Hold left click to draw
+- Scroll mouse wheel to change pen width
+- Press backspace to erase last line
+- Press ctrl + backspace to erase all
