@@ -58,6 +58,7 @@ def main():
     """initializes display and other resources, then handles game loop"""
     screen = pygame.display.set_mode(DEFAULT_SIZE)
     clock = pygame.time.Clock()
+    canvas_color = 'white'
     pen = Pen()
     eraser = Eraser()
     selected_tool = pen
@@ -68,16 +69,22 @@ def main():
     while True:
         ms = clock.tick(FPS)
         dt = get_delta_time(ms)
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                     if pygame.key.get_mods() and pygame.KMOD_CTRL:
                         lines.clear()
                         erase_marks.clear()
-                    elif lines:
-                        lines.pop()
+                    else:
+                        if lines:
+                            lines.pop()
+                        if erase_marks:
+                            erase_marks.pop()
+                            
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button != 2:
                     pen.down = True
@@ -86,17 +93,20 @@ def main():
                 if event.button == 3:
                     selected_tool = eraser
                     erase_marks.append({'width': pen.width, 'points': []})
+
             if event.type == pygame.MOUSEBUTTONUP:
                 if event.button != 2:
                     pen.down = False
                 if event.button == 3:
                     selected_tool = pen
+
             if event.type == pygame.MOUSEWHEEL:
                 pen.width += -1 if event.y > 0 else 1
                 if pen.width > max(range_width):
                     pen.width = max(range_width)
                 if pen.width < min(range_width):
                     pen.width = min(range_width)
+
         if pen.down:
             point = pygame.mouse.get_pos()
             if selected_tool == pen:
@@ -105,12 +115,12 @@ def main():
             if selected_tool == eraser:
                 if point not in erase_marks[-1]['points']:
                     erase_marks[-1]['points'].append(point)
-                    
+
         screen.fill('white')
         for line in lines:
             draw_points(screen, line['points'], line['color'], line['width'])
         for mark in erase_marks:
-            draw_points(screen, mark['points'], eraser.color, mark['width'])
+            draw_points(screen, mark['points'], canvas_color, mark['width'])
         pygame.display.update()
 
 
