@@ -33,11 +33,6 @@ def draw_points(surface, points, color, width=1):
         draw_line(surface, points[j - 1], point, color, width)
 
 
-def get_delta_time(ms_last_frame):
-    """calculate delta time based on milliseconds past"""
-    return round(ms_last_frame / 1000 * 60)
-
-
 def main():
     """initializes display and other resources, then handles game loop"""
     screen = pygame.display.set_mode(DEFAULT_SIZE)
@@ -52,8 +47,7 @@ def main():
     erase_marks = []
 
     while True:
-        ms = clock.tick(FPS)
-        dt = get_delta_time(ms)
+        clock.tick(FPS)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -87,7 +81,7 @@ def main():
                     selected_tool = 'pen'
 
             if event.type == pygame.MOUSEWHEEL:
-                pen.width += -1 if event.y > 0 else 1
+                pen_width += -1 if event.y > 0 else 1
                 if pen_width > max(range_width):
                     pen_width = max(range_width)
                 if pen_width < min(range_width):
